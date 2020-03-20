@@ -2,7 +2,7 @@ FROM python:3
 
 # 動作確認用のGUIアプリをインストール
 RUN apt-get update \
-    && apt-get install -y vim less \
+    && apt-get install -y x11-apps \
     && apt-get -y install libsdl-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev \
     && apt-get -y install libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev \
     && apt-get -y install locales \
@@ -15,7 +15,6 @@ ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:ja
 ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
-# ENV TERM xterm
 
 # ユーザーを作成
 ARG DOCKER_UID=1000
