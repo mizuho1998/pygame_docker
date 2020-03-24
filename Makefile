@@ -9,7 +9,7 @@
 	esac
 
 build: .env
-	docker-compose build
+	docker-compose build --build-arg DOCKER_UID=$(shell id -u) --build-arg DOCKER_GID=$(shell id -g)
 
 up: .env
 	docker-compose up -d

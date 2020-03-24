@@ -17,12 +17,16 @@ ENV LC_ALL ja_JP.UTF-8
 ENV TZ JST-9
 
 # ユーザーを作成
-ARG DOCKER_UID=1000
 ARG DOCKER_USER=docker
 ARG DOCKER_PASSWORD=docker
-RUN useradd -m \
-    --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
-    && echo ${DOCKER_USER}:${DOCKER_PASSWORD} | chpasswd
+ARG DOCKER_UID=1000
+ARG DOCKER_GID=1000
+
+RUN useradd -m ${DOCKER_USER} && \
+    echo "$DOCKER_USER:$DOCKER_PASSWORD" | chpasswd && \
+    usermod --shell /bin/bash ${DOCKER_USER} && \
+    usermod  --uid ${DOCKER_UID} ${DOCKER_USER} && \
+    groupmod --gid ${DOCKER_GID} ${DOCKER_USER}
 
 USER ${DOCKER_USER}
 
