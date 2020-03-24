@@ -25,8 +25,8 @@ ARG DOCKER_GID=1000
 RUN useradd -m ${DOCKER_USER} && \
     echo "$DOCKER_USER:$DOCKER_PASSWORD" | chpasswd && \
     usermod --shell /bin/bash ${DOCKER_USER} && \
-    usermod  --uid ${DOCKER_UID} ${DOCKER_USER} && \
-    groupmod --gid ${DOCKER_GID} ${DOCKER_USER}
+    usermod  --uid ${DOCKER_UID} ${DOCKER_USER}
+    # groupmod --gid ${DOCKER_GID} ${DOCKER_USER}
 
 USER ${DOCKER_USER}
 
